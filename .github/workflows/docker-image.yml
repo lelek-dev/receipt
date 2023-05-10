@@ -16,6 +16,6 @@ jobs:
       # uses: adambirds/docker-compose-action@cf2e51f76beacad15b1046de89ee2eb22ea70bac
       uses: adambirds/docker-compose-action@v1.3.0
       with:
-        compose-file: docker-compose.yml
-        services: web
-        test-command: npm run test
+        compose-file: "docker-compose.yml"
+        services: "web"
+        test-command: "npm run test"
