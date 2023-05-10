@@ -22,10 +22,8 @@ export class Item {
     checkForDate(string : string) {
         let regex = /(\d{1,2})[\/.]\s?(\d{1,2})[\/.]\s?(\d{4})/;
         let result = regex.exec(string);
-        console.log(result)
         if (result){
             let date : Date | boolean = this.dateFromString(result)
-            console.log(date)
             if (date){
                 this.value = date;
                 this.category = Categories.Date
