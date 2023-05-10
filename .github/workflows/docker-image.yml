@@ -7,19 +7,15 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Docker compose tests run
-      uses: cloudposse/github-action-docker-compose-test-run@0.1.2
+    - name: Docker Compose with Tests Action
+      # You may pin to the exact commit or the version.
+      # uses: adambirds/docker-compose-action@cf2e51f76beacad15b1046de89ee2eb22ea70bac
+      uses: adambirds/docker-compose-action@v1.3.0
       with:
-        # Docker compose file
-        file: docker-comppose.yml
-        # Service run tests inside
-        service: web
-        # Command to run tests
-        command: npm run test
+        compose-file: docker-compose.yml
+        services: web
+        test-command: npm run test:dev
