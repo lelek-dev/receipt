@@ -7,19 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Docker compose tests run
       uses: cloudposse/github-action-docker-compose-test-run@0.1.2
       with:
-        # Docker compose file
         file: docker-comppose.yml
-        # Service run tests inside
         service: web
-        # Command to run tests
         command: npm run test
