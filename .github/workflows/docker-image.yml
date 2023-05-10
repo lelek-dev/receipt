@@ -16,4 +16,6 @@ jobs:
       with:
         file: docker-compose.yml
         service: web
-        command: npm run test
+        entrypoint: npm
+        command: run test
+        workdir: /usr/src/app
