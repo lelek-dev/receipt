@@ -16,5 +16,5 @@ jobs:
       with:
         file: docker-compose.yml
         service: web
-        entrypoint: npm
-        command: run test
+        entrypoint: jest
+        command: dist/
