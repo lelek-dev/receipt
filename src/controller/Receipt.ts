@@ -1,3 +1,6 @@
+import { Categories } from "../interfaces/categories";
+import { Item } from "./Item";
+
 export class Receipt {
     fullText : string;
     lines : string[] = [];
@@ -5,10 +8,10 @@ export class Receipt {
 
     items : Item[] = []
 
-
     constructor(fullText : string) {
         this.fullText = fullText;
         this.splitText();
+        this.categorizeText();
 
     }
 
@@ -24,51 +27,10 @@ export class Receipt {
     }
     categorizeText(){
         this.lines.forEach(line => {
-
+            let item = new Item(line)
+            if (item.category != Categories.Unassigned){
+                this.items.push(item)
+            }
         })
     }
-}
-
-export class Item { 
-    text : string;
-    value? : string | number | Date | boolean;
-    category : Categories = Categories.Unassigned;
-
-    constructor(string : string) {
-        this.text = string;
-        this.categorize();
-    }
-
-    categorize() {
-        this.checkForDate(this.text)
-    }
-
-    // Text categorization functions 
-    checkForDate(string : string) {
-        let regex = /(\d{1,2})[\/.]\s?(\d{1,2})[\/.]\s?(\d{4})/;
-        let result = regex.exec(string);
-        if (result){
-            let date : Date | boolean = this.dateFromString(result)
-            if (date){
-                this.value = date;
-                this.category = Categories.Date
-            }
-        }
-    }
-    dateFromString(string : string[]) : Date | boolean {
-        if(string[1].length == 4){
-            return new Date(string[1] + " " + string[2] + " " + string[3])
-        }else if(string[3].length == 4){
-            return new Date(string[3] + " " + string[2] + " " + string[1])
-        }
-        return false
-    }
-}
-
-export enum Categories {
-    Unassigned,
-    Market,
-    Price,
-    Item,
-    Date
 }

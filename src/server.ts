@@ -1,8 +1,10 @@
 'use strict';
 
 import {processImage} from './controller/tesseract'
-import {Receipt, Item} from './controller/Receipt'
+import {Receipt} from './controller/Receipt'
 import express from 'express' 
+import { Keywords } from './controller/Keyword';
+import { Categories } from './interfaces/categories';
 
 // Constants
 const PORT = 8080;
@@ -17,11 +19,12 @@ app.get('/', (req, res) => {
 app.get('/test-manual', async function requestHandler(req,res){
   let text = await processImage('./img/WhatsApp Bild 2023-05-03 um 22.47.01.jpg')
   let receipt = new Receipt(text)
-  res.json(receipt.lines)
+  res.json(receipt.items)
 })
 
 app.get('/test', function requestHandler(req, res) {
-  // res.json(Item.checkForDate("04.05.2023"))
+  let markets = new Keywords(Categories.Market);
+  res.json(markets.items)
 });
 
 app.listen(PORT, HOST, () => {

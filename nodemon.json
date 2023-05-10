@@ -1,8 +1,8 @@
 {
     "verbose": true,
     "ignore": [],
-    "watch": ["src/**/*.ts"],
+    "watch": ["src/**/*.ts", "src/**/*.json", "src/**/*.test.ts"],
     "execMap": {
       "ts": "node -r ts-node/register"
     }
-  }
+}
