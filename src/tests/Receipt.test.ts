@@ -15,7 +15,7 @@ test.each<{input : string, expectedResult? : Date}>([
 test.each<{input : string, expectedResult? : string}>([
     {input: "SN ALDI SüD", expectedResult: "Aldi"},
     {input: "definitely not a market", expectedResult: undefined},
-    {input: "whowhwo sdsdawe", expectedResult: "Lidl"}
+    {input: "whowhwo sdsdawe", expectedResult: undefined}
 ])('Test Market $input $expectedResult', ({input, expectedResult}) => {
 
     let item = new Item(input)
