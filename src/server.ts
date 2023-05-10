@@ -1,7 +1,7 @@
 'use strict';
 
 import {processImage} from './controller/tesseract'
-import {Receipt} from './controller/Receipt'
+import {Receipt, Item} from './controller/Receipt'
 import express from 'express' 
 
 // Constants
@@ -21,7 +21,7 @@ app.get('/test-manual', async function requestHandler(req,res){
 })
 
 app.get('/test', function requestHandler(req, res) {
-  res.json(Receipt.checkForDate("04.05.2023"))
+  // res.json(Item.checkForDate("04.05.2023"))
 });
 
 app.listen(PORT, HOST, () => {

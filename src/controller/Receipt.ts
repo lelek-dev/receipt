@@ -1,11 +1,15 @@
 export class Receipt {
     fullText : string;
     lines : string[] = [];
-    items : string[][] = [];
+    words : string[][] = [];
+
+    items : Item[] = []
+
 
     constructor(fullText : string) {
         this.fullText = fullText;
         this.splitText();
+
     }
 
     splitText(){
@@ -13,36 +17,51 @@ export class Receipt {
         for(let i = 0; i <= this.lines.length; i++){
             if (this.lines[i] == undefined || this.lines[i].trim() == "")
               continue;
-            this.items[i] = []
-            this.items[i].push(this.lines[i].trim())
-            this.items[i].push(...this.lines[i].split(" "))
+            this.words[i] = []
+            this.words[i].push(this.lines[i].trim())
+            this.words[i].push(...this.lines[i].split(" "))
         }
     }
-    static checkForDate(string : string) : Date | boolean{
+    categorizeText(){
+        this.lines.forEach(line => {
+
+        })
+    }
+}
+
+export class Item { 
+    text : string;
+    value? : string | number | Date | boolean;
+    category : Categories = Categories.Unassigned;
+
+    constructor(string : string) {
+        this.text = string;
+        this.categorize();
+    }
+
+    categorize() {
+        this.checkForDate(this.text)
+    }
+
+    // Text categorization functions 
+    checkForDate(string : string) {
         let regex = /(\d{1,2})[\/.]\s?(\d{1,2})[\/.]\s?(\d{4})/;
         let result = regex.exec(string);
-        if (result == null){
-            return false;
-        }else {
-            return this.dateFromString(result)            
+        if (result){
+            let date : Date | boolean = this.dateFromString(result)
+            if (date){
+                this.value = date;
+                this.category = Categories.Date
+            }
         }
     }
-    static dateFromString(string : string[]) : Date | boolean {
+    dateFromString(string : string[]) : Date | boolean {
         if(string[1].length == 4){
             return new Date(string[1] + " " + string[2] + " " + string[3])
         }else if(string[3].length == 4){
             return new Date(string[3] + " " + string[2] + " " + string[1])
         }
         return false
-    }
-}
-
-export class Item { 
-    value : string | number;
-    category : Categories = Categories.Unassigned;
-
-    constructor(value : string) {
-        this.value = value;
     }
 }
 

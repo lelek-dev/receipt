@@ -9,6 +9,7 @@
         "start": "node dist/server.js",
         "buildAndStart": "npx tsc & node dist/server.js",
         "test": "npx tsc & jest dist/",
+        "dev:test": "jest dist/",
         "dev": "nodemon -L --config nodemon.json src/server.ts"
     },
     "dependencies": {
