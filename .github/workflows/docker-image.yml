@@ -19,4 +19,4 @@ jobs:
         compose-file: "docker-compose.yml"
         services: "web"
         test-container: "web"
-        test-command: "npm run test"
+        test-command: "npm run test:dev"
