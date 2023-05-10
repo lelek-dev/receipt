@@ -17,7 +17,6 @@ jobs:
       uses: adambirds/docker-compose-action@v1.3.0
       with:
         compose-file: "docker-compose.yml"
-        services: "web"
-        up-flags: "-d"
+        up-flags: "--detach"
         test-container: "web"
         test-command: "npm run test"
