@@ -14,6 +14,6 @@ jobs:
     - name: Docker compose tests run
       uses: cloudposse/github-action-docker-compose-test-run@0.1.2
       with:
-        file: docker-comppose.yml
+        file: docker-compose.yml
         service: web
         command: npm run test
