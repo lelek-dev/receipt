@@ -13,7 +13,7 @@ jobs:
     env:
       COMPOSE_FILE: docker-compose.yml
       SERVICE: web
-      TEST_CMD: npm run dev:test
+      TEST_CMD: npm run test
       NODE_ENV: development
     steps:
     - uses: actions/checkout@v3
