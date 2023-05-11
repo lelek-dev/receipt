@@ -23,3 +23,15 @@ test.each<{input : string, expectedResult? : string}>([
 
 })
 
+test.each<{input : string, expectedResult? : number}>([
+    {input: "Betrag 22,97 EUR", expectedResult: 22.97},
+    {input: "SUMME 50,11", expectedResult: 50.11},
+    {input: "SUMME EUR 7,94", expectedResult: 7.94},
+    {input: "SUMME NOT A NUMBER", expectedResult: undefined}
+])('Test Market $input $expectedResult', ({input, expectedResult}) => {
+
+    let item = new Item(input)
+    expect(item.value).toStrictEqual(expectedResult)
+
+})
+

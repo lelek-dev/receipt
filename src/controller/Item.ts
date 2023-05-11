@@ -2,6 +2,7 @@ import { Categories } from "../interfaces/categories";
 import { Keywords } from "./Keyword";
 
 const markets = new Keywords(Categories.Market)
+const prices = new Keywords(Categories.Price)
 
 export class Item { 
     text : string;
@@ -14,14 +15,14 @@ export class Item {
     }
 
     categorize() {
-        this.checkForDate(this.text)
+        this.identifyDate(this.text)
         this.identifyMarket(this.text)
+        this.identifyPrice(this.text)
     }
 
     // Text categorization functions 
-    checkForDate(string : string) {
-        let regex = /(\d{1,2})[\/.]\s?(\d{1,2})[\/.]\s?(\d{4})/;
-        let result = regex.exec(string);
+    identifyDate(string : string) {
+        let result = this.executeRegex(string, /(\d{1,2})[\/.]\s?(\d{1,2})[\/.]\s?(\d{4})/)
         if (result){
             let date : Date | boolean = this.dateFromString(result)
             if (date){
@@ -47,5 +48,28 @@ export class Item {
                 this.category = Categories.Market
             }
         });        
+    }
+    identifyPrice(string : string){
+        let foundKeyword : string | null = this.findKeyword(string, prices.items)
+        if (foundKeyword != null){
+            let result = this.executeRegex(string, /(\d{1,5})[,.](\d{2})?/);
+            if (result){
+                let number = result[0].replace(",", ".")
+                this.value = Number(number)
+                this.category = Categories.Price
+            }
+        }
+    }
+    findKeyword(string : string, keywords : string[]) : string | null {
+        let lower = string.toLowerCase()
+        for (let i = 0; i < keywords.length; i++){
+            if(lower.includes(keywords[i].toLowerCase())){
+                return keywords[i]
+            }
+        }
+        return null
+    }
+    executeRegex(string : string, regex : RegExp){
+        return regex.exec(string);
     }
 }

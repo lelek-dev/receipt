@@ -12,6 +12,8 @@ export class Keywords {
             case Categories.Market:
                 path += "markets.json"
                 break;
+            case Categories.Price:
+                path += "prices.json"
             default:
                 break;
         }
