@@ -13,7 +13,7 @@ jobs:
     env:
       COMPOSE_FILE: docker-compose.yml
       SERVICE: web
-      TEST_CMD: ./node_modules/.bin/jest ./dist
+      TEST_CMD: npm run test:dev
       NODE_ENV: development
     steps:
     - uses: actions/checkout@v3
@@ -28,10 +28,8 @@ jobs:
   
     - name: Build docker images
       run: docker-compose -f $COMPOSE_FILE build
-    # - name: Run docker image
-    #   run: docker-compose -f $COMPOSE_FILE up -d
-    - name: Install Jest globally
-      run: docker-compose -f $COMPOSE_FILE run $SERVICE npm install -g jest
+    # - name: Install Jest globally
+    #   run: docker-compose -f $COMPOSE_FILE run $SERVICE npm install -g jest
     - name: Run docker image and start tests
       run: docker-compose -f $COMPOSE_FILE run $SERVICE $TEST_CMD
     - name: Stop docker images
