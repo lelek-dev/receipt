@@ -27,9 +27,9 @@ jobs:
   
     - name: Build docker images
       run: docker-compose -f $COMPOSE_FILE build
-    - name: Run docker image
-      run: docker-compose -f $COMPOSE_FILE up -d
-    - name: Run tests
-      run: docker-compose -f $COMPOSE_FILE RUN $SERVICE $TEST_CMD
+    # - name: Run docker image
+    #   run: docker-compose -f $COMPOSE_FILE up -d
+    - name: Run docker image and start tests
+      run: docker-compose -f $COMPOSE_FILE run $SERVICE $TEST_CMD
     - name: Stop docker images
       run: docker-compose -f $COMPOSE_FILE down
