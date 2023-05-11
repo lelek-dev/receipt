@@ -9,13 +9,26 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: docker-compose.yml
+      SERVICE: web
+      TEST_CMD: npm run test
     steps:
     - uses: actions/checkout@v3
-    - name: Docker Compose with Tests Action
-      # You may pin to the exact commit or the version.
-      # uses: adambirds/docker-compose-action@cf2e51f76beacad15b1046de89ee2eb22ea70bac
-      uses: adambirds/docker-compose-action@v1.3.0
-      with:
-        compose-file: "docker-compose.yml"
-        test-container: "web"
-        test-command: "npm run test"
+#     - name: Docker Compose with Tests Action
+#       # You may pin to the exact commit or the version.
+#       # uses: adambirds/docker-compose-action@cf2e51f76beacad15b1046de89ee2eb22ea70bac
+#       uses: adambirds/docker-compose-action@v1.3.0
+#       with:
+#         compose-file: "docker-compose.yml"
+#         test-container: "web"
+#         test-command: "npm run test"
+  
+    - name: Build docker images
+      run: docker-compose -f $COMPOSE_FILE build
+    - name: Run docker image
+      run: docker-compose -f $COMPOSE_FILE up -d
+    - name: Run tests
+      run: docker-compose -f $COMPOSE_FILE RUN $TEST_CMD
+    - name: Stop docker images
+      run: docker-compose -f $COMPOSE_FILE down
