@@ -28,8 +28,8 @@ jobs:
   
     - name: Build docker images
       run: docker-compose -f $COMPOSE_FILE build
-    # - name: Install Jest globally
-    #   run: docker-compose -f $COMPOSE_FILE run $SERVICE npm install -g jest
+    - name: Install Jest globally
+      run: docker-compose -f $COMPOSE_FILE run $SERVICE npm install -D
     - name: Run docker image and start tests
       run: docker-compose -f $COMPOSE_FILE run $SERVICE $TEST_CMD
     - name: Stop docker images
