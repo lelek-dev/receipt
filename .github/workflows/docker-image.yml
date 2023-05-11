@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: Unit Tests 
     runs-on: ubuntu-latest
     env:
       COMPOSE_FILE: docker-compose.yml
@@ -29,6 +30,6 @@ jobs:
     - name: Run docker image
       run: docker-compose -f $COMPOSE_FILE up -d
     - name: Run tests
-      run: docker-compose -f $COMPOSE_FILE RUN $TEST_CMD
+      run: docker-compose -f $COMPOSE_FILE RUN $SERVICE $TEST_CMD
     - name: Stop docker images
       run: docker-compose -f $COMPOSE_FILE down
