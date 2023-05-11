@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/test-manual', async function requestHandler(req,res){
-  let text = await processImage('./img/WhatsApp Bild 2023-05-03 um 22.47.01.jpg')
+  let text = await processImage('./test-data/2023-05-09_Aldi.jpg')
   let receipt = new Receipt(text)
   res.json(receipt.items)
 })
