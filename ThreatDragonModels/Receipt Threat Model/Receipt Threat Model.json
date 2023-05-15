@@ -8,8 +8,8 @@
     "diagrams": [
       {
         "title": "Architecture",
-        "thumbnail": "./public/content/images/thumbnail.linddun.jpg",
-        "diagramType": "LINDDUN",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "diagramType": "STRIDE",
         "id": 0,
         "diagramJson": {
           "cells": [
