@@ -1,10 +1,18 @@
 {
   "summary": {
     "title": "Receipt Threat Model",
-    "owner": "@me"
+    "owner": "lelek-dev"
   },
   "detail": {
     "contributors": [],
-    "diagrams": []
+    "diagrams": [
+      {
+        "title": "Architecture",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "diagramType": "STRIDE",
+        "id": 0
+      }
+    ],
+    "reviewer": "lelek-dev"
   }
 }
